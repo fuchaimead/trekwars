@@ -1,6 +1,6 @@
 class Api::LocationsController < ApplicationController
     # query string: localhost:3001/api/locations?nerd_type=starwars
-
+  before_action :set_location, except: [:index, :create]
   def index
     if nerd_type = params[:nerd_type]      
       render json: Location.all.where(nerd_type: params[:nerd_type])
@@ -21,6 +21,7 @@ class Api::LocationsController < ApplicationController
   end
 
   def destroy
+    @location.destroy
   end
 
   private 

@@ -16,6 +16,14 @@ class Starwars extends Component {
     .catch( res => {
       console.log(res.data)
     })
+    axios.get('/api/locations?nerd_type=starwars')
+    .then( res => {
+      this.setState({locations: res.data})
+    })
+    .catch( res => {
+      console.log(res.data)
+    })
+
   }
 
   displayCharacters = () => {
@@ -23,6 +31,16 @@ class Starwars extends Component {
       return( <Character character={character} /> )
     })
   }
+
+ 
+
+  displayLocations = () => {
+    return this.state.locations.map( location => {
+      return(<Location location={location} /> )
+    })
+  }
+
+  
 
   render(){
     return(
@@ -38,7 +56,7 @@ class Starwars extends Component {
           <Grid.Column width={8}>
           <h1> Planets </h1> 
           <List>
-      
+           { this.displayLocations() }
            </List>
           </Grid.Column>
         </Grid>
