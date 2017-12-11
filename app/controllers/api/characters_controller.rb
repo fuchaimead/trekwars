@@ -3,7 +3,7 @@ class Api::CharactersController < ApplicationController
   # query string: localhost:3001/api/characters?nerd_type=starwars
   def index
     if nerd_type = params[:nerd_type]
-      render json: Character.all.where(nerd_type: params[:nerd_type])
+      render json: Character.all.where(nerd_type: nerd_type)
     else 
       render json: Character.all
     end
@@ -25,6 +25,7 @@ class Api::CharactersController < ApplicationController
   end
 
   def destroy
+    binding.pry
     @character.destroy
   end
 

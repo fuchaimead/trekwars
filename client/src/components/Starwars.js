@@ -23,16 +23,15 @@ class Starwars extends Component {
     .catch( res => {
       console.log(res.data)
     })
-
   }
 
   displayCharacters = () => {
     return this.state.characters.map( character => {
-      return( <Character character={character} /> )
+      return( <Character character={character} 
+      deleteCharacter = {this.deleteCharacter}  /> )
     })
   }
-
- 
+  
 
   displayLocations = () => {
     return this.state.locations.map( location => {
@@ -40,7 +39,15 @@ class Starwars extends Component {
     })
   }
 
-  
+
+  deleteCharater = (id) => {
+    window.confirm("Delete Character?")
+    axios.delete(`/api/characters/${id}`)
+    .then( () => {
+      const { characters } = this.state;
+      this.setState({ characters: characters.filter( c => c.id !== id ) })
+    })
+  }
 
   render(){
     return(
@@ -50,7 +57,7 @@ class Starwars extends Component {
           <Grid.Column width={8} >
           <h1> Characters </h1> 
           <List>
-           { this.displayCharacters() }
+           {this.displayCharacters() }
            </List>
           </Grid.Column>
           <Grid.Column width={8}>

@@ -7,9 +7,10 @@ import Character from './Character'
 
 
 class Startrek extends Component {
-  state = { characters: [], locations: []}
+ 
+  state = { characters: [], locations: [] }
 
-  componentDidUpdate(){
+  componentDidMount(){
     axios.get('/api/characters?nerd_type=startrek')
     .then( res => {
       console.log(res.data)

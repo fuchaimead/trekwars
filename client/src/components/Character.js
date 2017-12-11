@@ -29,16 +29,20 @@ class Character extends Component {
     this.setState({ name: e.target.value });
   }
 
-  
-  render() {
-    const { name } = this.state;
+deleteCharacter = (id) => {
+  console.log("Delete")
+}
 
+  render() {
+    const { name} = this.state;
+    const {deleteCharacter, id} = this.props
     if(this.state.editing)
       return(
         <List.Item>
           <Input type='text' defaultValue={name} onChange={this.handleChange} />
           <Button onClick={ () => this.toggleEdit(true) }>Cancel</Button>
           <Button primary onClick={ this.editCharacter }>Save</Button>
+          <Button primary onClick={() => deleteCharacter(id)}>Delete</Button>
         </List.Item>
       );
     else
